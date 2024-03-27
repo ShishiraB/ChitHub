@@ -71,5 +71,8 @@
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4"
-  }
+  },
+  "repository": "git@github.com:ShishiraB/ChitHub.git",
+  "author": "shishirab <shishira.21ai050@sode-edu.in>",
+  "license": "MIT"
 }
