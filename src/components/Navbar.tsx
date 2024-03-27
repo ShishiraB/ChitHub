@@ -5,6 +5,7 @@ import { Icons } from './Icons'
 import { buttonVariants } from './ui/Button'
 import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
+// import { ModeToggle } from './modetogg'
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)
@@ -19,15 +20,19 @@ const Navbar = async () => {
 
         {/* search bar */}
         <SearchBar />
-
-        {/* actions */}
-        {session?.user ? (
-          <UserAccountNav user={session.user} />
-        ) : (
-          <Link href='/sign-in' className={buttonVariants()}>
-            Sign In
-          </Link>
-        )}
+        <div className="flex items-center gap-3">
+          {/* Mode Toggle */}
+          {/* <ModeToggle /> */}
+          {/* Actions */}
+          {session?.user ? (
+            <UserAccountNav user={session.user} />
+          ) : (
+            <Link href='/sign-in' className={buttonVariants()}>
+              Sign In
+            </Link>
+          )}
+          
+        </div>
       </div>
     </div>
   )

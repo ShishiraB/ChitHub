@@ -1,6 +1,6 @@
 'use client'
 
-import { Prisma, Subchittie } from '@prisma/client'
+import { Prisma, Subchitties } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import debounce from 'lodash.debounce'
@@ -49,8 +49,8 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
     queryFn: async () => {
       if (!input) return []
       const { data } = await axios.get(`/api/search?q=${input}`)
-      return data as (Subchittie & {
-        _count: Prisma.SubchittieCountOutputType
+      return data as (Subchitties & {
+        _count: Prisma.SubredditCountOutputType
       })[]
     },
     queryKey: ['search-query'],
@@ -81,16 +81,16 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
           {isFetched && <CommandEmpty>No results found.</CommandEmpty>}
           {(queryResults?.length ?? 0) > 0 ? (
             <CommandGroup heading='Communities'>
-              {queryResults?.map((subchittie) => (
+              {queryResults?.map((subchitties) => (
                 <CommandItem
                   onSelect={(e) => {
                     router.push(`/c/${e}`)
                     router.refresh()
                   }}
-                  key={subchittie.id}
-                  value={subchittie.name}>
+                  key={subchitties.id}
+                  value={subchitties.name}>
                   <Users className='mr-2 h-4 w-4' />
-                  <a href={`/c/${subchittie.name}`}>c/{subchittie.name}</a>
+                  <a href={`/c/${subchitties.name}`}>c/{subchitties.name}</a>
                 </CommandItem>
               ))}
             </CommandGroup>

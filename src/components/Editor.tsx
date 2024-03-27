@@ -19,10 +19,10 @@ import '@/styles/editor.css'
 type FormData = z.infer<typeof PostValidator>
 
 interface EditorProps {
-  subchittieId: string
+  subchittiesId: string
 }
 
-export const Editor: React.FC<EditorProps> = ({ subchittieId }) => {
+export const Editor: React.FC<EditorProps> = ({ subchittiesId }) => {
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ export const Editor: React.FC<EditorProps> = ({ subchittieId }) => {
   } = useForm<FormData>({
     resolver: zodResolver(PostValidator),
     defaultValues: {
-      subchittieId,
+      subchittiesId,
       title: '',
       content: null,
     },
@@ -45,10 +45,10 @@ export const Editor: React.FC<EditorProps> = ({ subchittieId }) => {
     mutationFn: async ({
       title,
       content,
-      subchittieId,
+      subchittiesId,
     }: PostCreationRequest) => {
-      const payload: PostCreationRequest = { title, content, subchittieId }
-      const { data } = await axios.post('/api/subchittie/post/create', payload)
+      const payload: PostCreationRequest = { title, content, subchittiesId }
+      const { data } = await axios.post('/api/subchitties/post/create', payload)
       return data
     },
     onError: () => {
@@ -171,7 +171,7 @@ export const Editor: React.FC<EditorProps> = ({ subchittieId }) => {
     const payload: PostCreationRequest = {
       title: data.title,
       content: blocks,
-      subchittieId,
+      subchittiesId,
     }
 
     createPost(payload)
@@ -186,7 +186,7 @@ export const Editor: React.FC<EditorProps> = ({ subchittieId }) => {
   return (
     <div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
       <form
-        id='subchittie-post-form'
+        id='subchitties-post-form'
         className='w-fit'
         onSubmit={handleSubmit(onSubmit)}>
         <div className='prose prose-stone dark:prose-invert'>

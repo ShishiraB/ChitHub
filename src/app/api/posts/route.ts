@@ -15,11 +15,11 @@ export async function GET(req: Request) {
         userId: session.user.id,
       },
       include: {
-        subchittie: true,
+        subchitties: true,
       },
     })
 
-    followedCommunitiesIds = followedCommunities.map((sub) => sub.subchittie.id)
+    followedCommunitiesIds = followedCommunities.map((sub) => sub.subchitties.id)
   }
 
   try {
@@ -39,13 +39,13 @@ export async function GET(req: Request) {
 
     if (subchittieName) {
       whereClause = {
-        subchittie: {
+        subchitties: {
           name: subchittieName,
         },
       }
     } else if (session) {
       whereClause = {
-        subchittie: {
+        subchitties: {
           id: {
             in: followedCommunitiesIds,
           },
@@ -60,7 +60,7 @@ export async function GET(req: Request) {
         createdAt: 'desc',
       },
       include: {
-        subchittie: true,
+        subchitties: true,
         votes: true,
         author: true,
         comments: true,

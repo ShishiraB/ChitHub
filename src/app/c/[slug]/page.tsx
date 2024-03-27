@@ -16,7 +16,7 @@ const page = async ({ params }: PageProps) => {
 
   const session = await getAuthSession()
 
-  const subchittie = await db.subchittie.findFirst({
+  const subchitties = await db.subchitties.findFirst({
     where: { name: slug },
     include: {
       posts: {
@@ -24,7 +24,7 @@ const page = async ({ params }: PageProps) => {
           author: true,
           votes: true,
           comments: true,
-          subchittie: true,
+          subchitties: true,
         },
         orderBy: {
           createdAt: 'desc'
@@ -34,15 +34,15 @@ const page = async ({ params }: PageProps) => {
     },
   })
 
-  if (!subchittie) return notFound()
+  if (!subchitties) return notFound()
 
   return (
     <>
       <h1 className='font-bold text-3xl md:text-4xl h-14'>
-        c/{subchittie.name}
+        c/{subchitties.name}
       </h1>
       <MiniCreatePost session={session} />
-      <PostFeed initialPosts={subchittie.posts} subchittieName={subchittie.name} />
+      <PostFeed initialPosts={subchitties.posts} subredditName={subchitties.name} />
     </>
   )
 }

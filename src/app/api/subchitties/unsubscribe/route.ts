@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { SubchittieSubscriptionValidator } from '@/lib/validators/subchittie'
+import { SubchittiesSubscriptionValidator } from '@/lib/validators/subchitties'
 import { z } from 'zod'
 
 export async function POST(req: Request) {
@@ -12,36 +12,36 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json()
-    const { subchittieId } = SubchittieSubscriptionValidator.parse(body)
+    const { subchittiesId } = SubchittiesSubscriptionValidator.parse(body)
 
     // check if user has already subscribed or not
     const subscriptionExists = await db.subscription.findFirst({
       where: {
-        subchittieId,
+        subchittiesId,
         userId: session.user.id,
       },
     })
 
     if (!subscriptionExists) {
       return new Response(
-        "You've not been subscribed to this subchittie, yet.",
+        "You've not been subscribed to this subchitties, yet.",
         {
           status: 400,
         }
       )
     }
 
-    // create subchittie and associate it with the user
+    // create subchitties and associate it with the user
     await db.subscription.delete({
       where: {
-        userId_subchittieId: {
-          subchittieId,
+        userId_subchittiesId: {
+          subchittiesId,
           userId: session.user.id,
         },
       },
     })
 
-    return new Response(subchittieId)
+    return new Response(subchittiesId)
   } catch (error) {
     (error)
     if (error instanceof z.ZodError) {
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     }
 
     return new Response(
-      'Could not unsubscribe from subchittie at this time. Please try later',
+      'Could not unsubscribe from subchitties at this time. Please try later',
       { status: 500 }
     )
   }

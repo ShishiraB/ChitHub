@@ -32,7 +32,7 @@ export async function PATCH(req: Request) {
     }
 
     return new Response(
-      'Could not post to subchittie at this time. Please try later',
+      'Could not post to subchitties at this time. Please try later',
       { status: 500 }
     )
   }

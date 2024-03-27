@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -48,7 +45,7 @@ model User {
   name              String?
   email             String?        @unique
   emailVerified     DateTime?
-  createdSubchitties Subchittie[]    @relation("CreatedBy")
+  createdSubreddits Subchitties[]  @relation("CreatedBy")
   subscriptions     Subscription[]
   votes             Vote[]
 
@@ -62,7 +59,7 @@ model User {
   CommentVote CommentVote[]
 }
 
-model Subchittie {
+model Subchitties {
   id        String   @id @default(cuid())
   name      String   @unique
   createdAt DateTime @default(now())
@@ -79,10 +76,10 @@ model Subchittie {
 model Subscription {
   user        User      @relation(fields: [userId], references: [id])
   userId      String
-  subchittie   Subchittie @relation(fields: [subchittieId], references: [id])
-  subchittieId String
+  subchitties   Subchitties @relation(fields: [subchittiesId], references: [id])
+  subchittiesId String
 
-  @@id([userId, subchittieId])
+  @@id([userId, subchittiesId])
 }
 
 model Post {
@@ -93,8 +90,8 @@ model Post {
   updatedAt   DateTime  @updatedAt
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String
-  subchittie   Subchittie @relation(fields: [subchittieId], references: [id])
-  subchittieId String
+  subchitties   Subchitties @relation(fields: [subchittiesId], references: [id])
+  subchittiesId String
   comments    Comment[] 
   votes       Vote[]
 }
