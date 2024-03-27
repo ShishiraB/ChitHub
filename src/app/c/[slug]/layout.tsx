@@ -123,7 +123,7 @@ const Layout = async ({
                 <SubscribeLeaveToggle
                   isSubscribed={isSubscribed}
                   subchittiesId={subchitties.id}
-                  subredditName={subchitties.name}
+                  subchittiesName={subchitties.name}
                 />
               ) : null}
 

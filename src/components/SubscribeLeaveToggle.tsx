@@ -11,13 +11,13 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts'
 interface SubscribeLeaveToggleProps {
   isSubscribed: boolean
   subchittiesId: string
-  subredditName: string
+  subchittiesName: string
 }
 
 const SubscribeLeaveToggle = ({
   isSubscribed,
   subchittiesId,
-  subredditName,
+  subchittiesName,
 }: SubscribeLeaveToggleProps) => {
   const { toast } = useToast()
   const { loginToast } = useCustomToasts()
@@ -53,7 +53,7 @@ const SubscribeLeaveToggle = ({
       })
       toast({
         title: 'Subscribed!',
-        description: `You are now subscribed to c/${subredditName}`,
+        description: `You are now subscribed to c/${subchittiesName}`,
       })
     },
   })
@@ -82,7 +82,7 @@ const SubscribeLeaveToggle = ({
       })
       toast({
         title: 'Unsubscribed!',
-        description: `You are now unsubscribed from/${subredditName}`,
+        description: `You are now unsubscribed from/${subchittiesName}`,
       })
     },
   })

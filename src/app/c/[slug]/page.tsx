@@ -34,7 +34,10 @@ const page = async ({ params }: PageProps) => {
     },
   })
 
-  if (!subchitties) return notFound()
+  if (!subchitties || subchitties.name !== slug) {
+    // If the subreddit doesn't exist or the retrieved subreddit doesn't match the requested slug, return a 404 page
+    return notFound()
+  }
 
   return (
     <>
@@ -42,7 +45,7 @@ const page = async ({ params }: PageProps) => {
         c/{subchitties.name}
       </h1>
       <MiniCreatePost session={session} />
-      <PostFeed initialPosts={subchitties.posts} subredditName={subchitties.name} />
+      <PostFeed initialPosts={subchitties.posts} subchittiesName={subchitties.name} />
     </>
   )
 }
