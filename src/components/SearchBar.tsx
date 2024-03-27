@@ -50,7 +50,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
       if (!input) return []
       const { data } = await axios.get(`/api/search?q=${input}`)
       return data as (Subchitties & {
-        _count: Prisma.SubredditCountOutputType
+        _count: Prisma.SubchittiesCountOutputType
       })[]
     },
     queryKey: ['search-query'],
