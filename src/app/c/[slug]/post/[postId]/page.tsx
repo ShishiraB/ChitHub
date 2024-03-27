@@ -11,7 +11,7 @@ import { ArrowBigDown, ArrowBigUp, Loader2 } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
-interface SubChittiePostPageProps {
+interface SubRedditPostPageProps {
   params: {
     postId: string
   }
@@ -20,7 +20,7 @@ interface SubChittiePostPageProps {
 export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
 
-const SubChittiePostPage = async ({ params }: SubChittiePostPageProps) => {
+const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
   const cachedPost = (await redis.hgetall(
     `post:${params.postId}`
   )) as CachedPost
@@ -105,4 +105,4 @@ function PostVoteShell() {
   )
 }
 
-export default SubChittiePostPage
+export default SubRedditPostPage

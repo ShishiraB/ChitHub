@@ -10,13 +10,13 @@ interface pageProps {
 }
 
 const page = async ({ params }: pageProps) => {
-  const subchittie = await db.subchittie.findFirst({
+  const subchitties = await db.subchitties.findFirst({
     where: {
       name: params.slug,
     },
   })
 
-  if (!subchittie) return notFound()
+  if (!subchitties) return notFound()
 
   return (
     <div className='flex flex-col items-start gap-6'>
@@ -33,10 +33,10 @@ const page = async ({ params }: pageProps) => {
       </div>
 
       {/* form */}
-      <Editor subchittieId={subchittie.id} />
+      <Editor subchittiesId={subchitties.id} />
 
       <div className='w-full flex justify-end'>
-        <Button type='submit' className='w-full' form='subchittie-post-form'>
+        <Button type='submit' className='w-full' form='subchitties-post-form'>
           Post
         </Button>
       </div>

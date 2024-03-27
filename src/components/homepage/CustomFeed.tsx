@@ -15,15 +15,15 @@ const CustomFeed = async () => {
       userId: session.user.id,
     },
     include: {
-      subchittie: true,
+      subchitties: true,
     },
   })
 
   const posts = await db.post.findMany({
     where: {
-      subchittie: {
+      subchitties: {
         name: {
-          in: followedCommunities.map((sub) => sub.subchittie.name),
+          in: followedCommunities.map((sub) => sub.subchitties.name),
         },
       },
     },
@@ -34,7 +34,7 @@ const CustomFeed = async () => {
       votes: true,
       author: true,
       comments: true,
-      subchittie: true,
+      subchitties: true,
     },
     take: INFINITE_SCROLL_PAGINATION_RESULTS,
   })

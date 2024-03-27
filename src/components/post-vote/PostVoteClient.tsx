@@ -40,7 +40,7 @@ const PostVoteClient = ({
         postId: postId,
       }
 
-      await axios.patch('/api/subchittie/post/vote', payload)
+      await axios.patch('/api/subchitties/post/vote', payload)
     },
     onError: (err, voteType) => {
       if (voteType === 'UP') setVotesAmt((prev) => prev - 1)

@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
 
-    const { title, content, subchittieId } = PostValidator.parse(body)
+    const { title, content, subchittiesId } = PostValidator.parse(body)
 
     const session = await getAuthSession()
 
@@ -15,10 +15,10 @@ export async function POST(req: Request) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    // verify user is subscribed to passed subchittie id
+    // verify user is subscribed to passed subchitties id
     const subscription = await db.subscription.findFirst({
       where: {
-        subchittieId,
+        subchittiesId,
         userId: session.user.id,
       },
     })
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
         title,
         content,
         authorId: session.user.id,
-        subchittieId,
+        subchittiesId,
       },
     })
 
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     }
 
     return new Response(
-      'Could not post to subchittie at this time. Please try later',
+      'Could not post to subchitties at this time. Please try later',
       { status: 500 }
     )
   }

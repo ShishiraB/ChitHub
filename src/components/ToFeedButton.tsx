@@ -10,17 +10,17 @@ const ToFeedButton = () => {
   // if path is /c/mycom, turn into /
   // if path is /c/mycom/post/cligad6jf0003uhest4qqkeco, turn into /c/mycom
 
-  const subchittiePath = getSubchittiePath(pathname)
+  const subredditPath = getSubredditPath(pathname)
 
   return (
-    <a href={subchittiePath} className={buttonVariants({ variant: 'ghost' })}>
+    <a href={subredditPath} className={buttonVariants({ variant: 'ghost' })}>
       <ChevronLeft className='h-4 w-4 mr-1' />
-      {subchittiePath === '/' ? 'Back home' : 'Back to community'}
+      {subredditPath === '/' ? 'Back home' : 'Back to community'}
     </a>
   )
 }
 
-const getSubchittiePath = (pathname: string) => {
+const getSubredditPath = (pathname: string) => {
   const splitPath = pathname.split('/')
 
   if (splitPath.length === 3) return '/'

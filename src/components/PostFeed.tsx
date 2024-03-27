@@ -12,10 +12,10 @@ import { useSession } from 'next-auth/react'
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[]
-  subchittieName?: string
+  subredditName?: string
 }
 
-const PostFeed: FC<PostFeedProps> = ({ initialPosts, subchittieName }) => {
+const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
   const lastPostRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
@@ -28,7 +28,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subchittieName }) => {
     async ({ pageParam = 1 }) => {
       const query =
         `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
-        (!!subchittieName ? `&subchittieName=${subchittieName}` : '')
+        (!!subredditName ? `&subredditName=${subredditName}` : '')
 
       const { data } = await axios.get(query)
       return data as ExtendedPost[]
@@ -70,7 +70,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subchittieName }) => {
               <Post
                 post={post}
                 commentAmt={post.comments.length}
-                subchittieName={post.subchittie.name}
+                subredditName={post.subchitties.name}
                 votesAmt={votesAmt}
                 currentVote={currentVote}
               />
@@ -82,7 +82,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subchittieName }) => {
               key={post.id}
               post={post}
               commentAmt={post.comments.length}
-              subchittieName={post.subchittie.name}
+              subredditName={post.subchitties.name}
               votesAmt={votesAmt}
               currentVote={currentVote}
             />

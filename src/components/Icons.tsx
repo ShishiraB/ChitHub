@@ -1,16 +1,13 @@
-import { LucideProps, MessageSquare, User } from 'lucide-react'
+import { LucideProps, MessageSquare, User } from 'lucide-react';
 
 export const Icons = {
   user: User,
   logo: (props: LucideProps) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z" fill="#ffd185"/>
-  <path d="M6 18h12" stroke="#000"/>
-  <path d="M6 14h12" stroke="#000"/>
-  <rect width="12" height="12" x="6" y="10" fill="#000"/>
-</svg>
-
-
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="orange" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square-quote">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <path d="M8 12a2 2 0 0 0 2-2V8H8"/>
+      <path d="M14 12a2 2 0 0 0 2-2V8h-2"/>
+    </svg>
   ),
   google: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 24 24'>
@@ -34,4 +31,4 @@ export const Icons = {
     </svg>
   ),
   commentReply: MessageSquare,
-}
+};

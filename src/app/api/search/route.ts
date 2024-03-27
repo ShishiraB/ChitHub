@@ -6,7 +6,7 @@ export async function GET(req: Request) {
 
   if (!q) return new Response('Invalid query', { status: 400 })
 
-  const results = await db.subchittie.findMany({
+  const results = await db.subchitties.findMany({
     where: {
       name: {
         startsWith: q,

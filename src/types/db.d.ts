@@ -1,7 +1,7 @@
-import type { Post, Subchittie, User, Vote, Comment } from '@prisma/client'
+import type { Post, Subchitties, User, Vote, Comment } from '@prisma/client'
 
 export type ExtendedPost = Post & {
-  subchittie: Subchittie
+  subchitties: Subchitties
   votes: Vote[]
   author: User
   comments: Comment[]

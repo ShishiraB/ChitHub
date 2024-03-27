@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/Button'
-import { SubscribeToSubchittiePayload } from '@/lib/validators/subchittie'
+import { SubscribeToSubchittiesPayload } from '@/lib/validators/subchitties'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
@@ -10,14 +10,14 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts'
 
 interface SubscribeLeaveToggleProps {
   isSubscribed: boolean
-  subchittieId: string
-  subchittieName: string
+  subchittiesId: string
+  subredditName: string
 }
 
 const SubscribeLeaveToggle = ({
   isSubscribed,
-  subchittieId,
-  subchittieName,
+  subchittiesId,
+  subredditName,
 }: SubscribeLeaveToggleProps) => {
   const { toast } = useToast()
   const { loginToast } = useCustomToasts()
@@ -25,11 +25,11 @@ const SubscribeLeaveToggle = ({
 
   const { mutate: subscribe, isLoading: isSubLoading } = useMutation({
     mutationFn: async () => {
-      const payload: SubscribeToSubchittiePayload = {
-        subchittieId,
+      const payload: SubscribeToSubchittiesPayload = {
+        subchittiesId,
       }
 
-      const { data } = await axios.post('/api/subchittie/subscribe', payload)
+      const { data } = await axios.post('/api/subchitties/subscribe', payload)
       return data as string
     },
     onError: (err) => {
@@ -53,18 +53,18 @@ const SubscribeLeaveToggle = ({
       })
       toast({
         title: 'Subscribed!',
-        description: `You are now subscribed to c/${subchittieName}`,
+        description: `You are now subscribed to c/${subredditName}`,
       })
     },
   })
 
   const { mutate: unsubscribe, isLoading: isUnsubLoading } = useMutation({
     mutationFn: async () => {
-      const payload: SubscribeToSubchittiePayload = {
-        subchittieId,
+      const payload: SubscribeToSubchittiesPayload = {
+        subchittiesId,
       }
 
-      const { data } = await axios.post('/api/subchittie/unsubscribe', payload)
+      const { data } = await axios.post('/api/subchitties/unsubscribe', payload)
       return data as string
     },
     onError: (err: AxiosError) => {
@@ -82,7 +82,7 @@ const SubscribeLeaveToggle = ({
       })
       toast({
         title: 'Unsubscribed!',
-        description: `You are now unsubscribed from/${subchittieName}`,
+        description: `You are now unsubscribed from/${subredditName}`,
       })
     },
   })
